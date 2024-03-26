@@ -14,13 +14,12 @@ public class BoardNativeRepository {
     private final EntityManager em;
 
     @Transactional
-    public void updateById(int id, String title, String content, String username) {
+    public void updateById(int id, String title, String content) {
         Query query =
-                em.createNativeQuery("update board_tb set title=?, content=?, username=? where id=?");
+                em.createNativeQuery("update board_tb set title=?, content=? where id=?");
         query.setParameter(1, title);
         query.setParameter(2, content);
-        query.setParameter(3, username);
-        query.setParameter(4, id);
+        query.setParameter(3, id);
 
         query.executeUpdate();
     }
@@ -37,12 +36,11 @@ public class BoardNativeRepository {
     }
 
     @Transactional
-    public void save(String title, String content, String username) {
+    public void save(String title, String content) {
         Query query =
-                em.createNativeQuery("insert into board_tb(title, content, username, created_at) values(?,?,?,now())");
+                em.createNativeQuery("insert into board_tb(title, content, created_at) values(?,?,now())");
         query.setParameter(1, title);
         query.setParameter(2, content);
-        query.setParameter(3, username);
 
         query.executeUpdate();
     }

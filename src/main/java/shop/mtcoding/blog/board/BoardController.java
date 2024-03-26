@@ -16,8 +16,8 @@ public class BoardController {
     private final BoardNativeRepository boardNativeRepository;
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable Integer id, String title, String content, String username){
-        boardNativeRepository.updateById(id, title, content, username);
+    public String update(@PathVariable Integer id, String title, String content){
+        boardNativeRepository.updateById(id, title, content);
         return "redirect:/board/"+id;
     }
 
@@ -36,8 +36,8 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(String title, String content, String username){
-        boardNativeRepository.save(title, content, username);
+    public String save(String title, String content){
+        boardNativeRepository.save(title, content);
         return "redirect:/";
     }
 
