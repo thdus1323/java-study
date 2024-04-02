@@ -36,8 +36,8 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(String title, String content){
-        boardNativeRepository.save(title, content);
+    public String save(String title, String content, String username){
+       boardNativeRepository.save(title, content, username);
         return "redirect:/";
     }
 

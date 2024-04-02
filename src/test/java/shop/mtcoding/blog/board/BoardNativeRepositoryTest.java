@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,22 +18,20 @@ public class BoardNativeRepositoryTest {
     private BoardNativeRepository boardNativeRepository;
 
     @Test
-    public void updateById_test() {
+    public void findAll_test() {
         // given
-        int id = 1;
-        String title = "제목수정1";
-        String content = "내용수정1";
-        String username = "bori";
 
         // when
-        boardNativeRepository.updateById(id, title, content, username);
+        List<Board> boardList = boardNativeRepository.findAll();
 
         // then
-        Board board = boardNativeRepository.findById(id);
-        System.out.println("updateById_test/board : " + board);
-        assertThat(board.getTitle()).isEqualTo("제목수정1");
-        assertThat(board.getContent()).isEqualTo("내용수정1");
-        assertThat(board.getUsername()).isEqualTo("bori");
+        System.out.println("findAll_test/size : " + boardList.size());
+        System.out.println("findAll_test/username : " + boardList.get(2).getUsername());
+
+        // org.assertj.core.api
+        Assertions.assertThat(boardList.size()).isEqualTO(4);
+        Assertions.assertThat(boardList.get(2).getUsername()).isEqualTO("ssar");
+
     }
 
     @Test
